@@ -1,0 +1,154 @@
+
+`timescale 1ns/1ps
+
+module mips_top_tb;
+
+reg CLK;
+reg RST;
+
+
+
+mips_top CPU (
+    .CLK(CLK),
+    .RST(RST)
+);
+
+
+
+always #5 CLK = ~CLK;
+
+
+
+
+initial begin
+
+    CLK = 1'b0;
+    RST = 1'b1;
+
+    
+
+    #10;
+    RST = 1'b0;
+
+    
+    // $t1 = register 9
+    CPU.REG_FILE.registers[9] = 32'd5;
+
+
+    
+
+    $display("");
+    $display("==============================================");
+    $display("           INITIAL VALUES");
+    $display("==============================================");
+
+    $display("Data Memory [0] = %d",
+             CPU.Data_Memory_inst.memory[0]);
+
+    $display("Data Memory [1] = %d",
+             CPU.Data_Memory_inst.memory[1]);
+
+    $display("----------------------------------------------");
+
+    $display("$t0 (R8)  = %d",
+             CPU.REG_FILE.registers[8]);
+
+    $display("$t1 (R9)  = %d",
+             CPU.REG_FILE.registers[9]);
+
+    $display("$t2 (R10) = %d",
+             CPU.REG_FILE.registers[10]);
+
+    $display("$t3 (R11) = %d",
+             CPU.REG_FILE.registers[11]);
+
+    $display("$t4 (R12) = %d",
+             CPU.REG_FILE.registers[12]);
+
+    $display("$t5 (R13) = %d",
+             CPU.REG_FILE.registers[13]);
+
+    $display("$t6 (R14) = %d",
+             CPU.REG_FILE.registers[14]);
+
+
+    //===============================================
+    // Run CPU
+    //===============================================
+
+    #100;
+
+
+    //===============================================
+    // Display Final Values
+    //===============================================
+
+    $display("");
+    $display("==============================================");
+    $display("            FINAL VALUES");
+    $display("==============================================");
+
+    $display("PC = %h", CPU.pc_addr);
+
+    $display("Instruction = %h", CPU.instruction);
+
+    $display("----------------------------------------------");
+
+    $display("Data Memory [0] = %d",
+             CPU.Data_Memory_inst.memory[0]);
+
+    $display("Data Memory [1] = %d",
+             CPU.Data_Memory_inst.memory[1]);
+
+    $display("----------------------------------------------");
+
+    $display("$t0 (R8)  = %d",
+             CPU.REG_FILE.registers[8]);
+
+    $display("$t1 (R9)  = %d",
+             CPU.REG_FILE.registers[9]);
+
+    $display("$t2 (R10) = %d",
+             CPU.REG_FILE.registers[10]);
+
+    $display("$t3 (R11) = %0d",
+           $signed(CPU.REG_FILE.registers[11]));
+
+    $display("$t4 (R12) = %d",
+             CPU.REG_FILE.registers[12]);
+
+    $display("$t5 (R13) = %d",
+             CPU.REG_FILE.registers[13]);
+
+    $display("$t6 (R14) = %d",
+             CPU.REG_FILE.registers[14]);
+             
+    $display("$s2 (R18) = %d",
+         CPU.REG_FILE.registers[18]);
+
+    $display("==============================================");
+
+    #10;
+    $stop;
+
+end
+
+
+
+always @(posedge CLK) begin
+
+    if (!RST) begin
+
+        $display(
+            "Time=%0t | PC=%h | Instruction=%h | ALU_OUT=%d",
+            $time,
+            CPU.pc_addr,
+            CPU.instruction,
+            CPU.ALU_OUT
+        );
+
+    end
+
+end
+
+endmodule

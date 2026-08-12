@@ -1,0 +1,215 @@
+  module mips_top(
+  
+  input wire CLK,
+  input wire RST
+  
+  );
+  
+  
+  wire [31:0] pc_addr;
+  wire [31:0] instruction;
+  
+  
+  wire [4:0]   instruction_mux_out;
+  
+  wire [31:0] Read_Data1;
+  wire [31:0] Read_Data2;
+  
+  wire [31:0] extended_instruction;
+  
+  wire [2:0] ALUControl_Out;
+  
+  wire [31:0] ALU_input;
+  
+  wire Zero_Flag;
+  
+  wire [31:0] ALU_OUT;
+  
+  wire Branch_Result;
+  
+  wire       RegDst;
+  wire       Branch;
+  wire       MemRead;
+  wire       MemtoReg;
+  wire [1:0] ALUOP;
+  wire       MemWrite;
+  wire       ALUSrc;
+  wire       RegWrite;
+  wire       jump;
+  
+  
+  wire [31:0]   read_data;
+  wire [31:0]   Data_Memory_Mux_out;
+  wire [31:0]   next_pc;
+  
+  wire [31:0]   extended_shifted;
+  
+  
+ 
+   wire  [31:0]  ALU_adder_out_one;
+   
+   wire  [31:0] jump_address;
+    
+    wire  [31:0] ALU_adder_out_two;
+    wire  [31:0] Branch_Mux_out;
+//**********************************************inst*****************************  
+ Instruction_Memory Instruction_Memory_inst(
+     .pc_addr(pc_addr),
+    .instruction(instruction)
+);
+  
+  //************************************mux*****************************
+ mux_2x1 #(.width(5))  mux_2x1_instruction
+(
+   .A(instruction[20:16]),
+   .B(instruction[15:11]),
+  
+   .Sel(RegDst),
+   .out(instruction_mux_out)
+
+);
+
+ 
+//***********************************Register_File**********************************
+Register_File REG_FILE (
+.clk(CLK),
+.reset(RST),
+.Read_Reg1(instruction[25:21]),
+.Read_Reg2(instruction[20:16]),
+.Write_Reg(instruction_mux_out),
+.Write_Data(Data_Memory_Mux_out),
+.RegWrite(RegWrite),
+.Read_Data1(Read_Data1),
+.Read_Data2(Read_Data2)
+);
+//*********************************Sign_Extend****************************
+Sign_Extend Extend (
+.immediate(instruction[15:0]),
+.extended(extended_instruction)
+);
+//*************************************mux_2x1_ALU*********************
+mux_2x1 #(.width(32))mux_2x1_ALU (
+.A(Read_Data2),
+.B(extended_instruction),
+.Sel(ALUSrc),
+.out(ALU_input)
+);
+//*************************************ALU_COntrol******************************
+ALU_Control ALU_Control_inst (
+    .ALUOp(ALUOP),
+    .funct(instruction[5:0]),
+    .ALUControl(ALUControl_Out)
+);
+//******************************************ALU_32******************
+ALU_32 ALU (
+.A(Read_Data1),
+.B(ALU_input),
+.ALUControl(ALUControl_Out),
+.out(ALU_OUT),
+.Zero(Zero_Flag)
+);
+// ****************************************mux after datamemory************************** 
+   mux_2x1 #(.width(32)) mux_2x1_datamemory
+(
+   .A(ALU_OUT),
+   .B(read_data),
+  
+   .Sel(MemtoReg),
+   .out(Data_Memory_Mux_out)
+
+);
+ //************************************** Branch_Unit *************************
+
+Branch_Unit Branch_Unit_inst(
+ .Branch(Branch),
+ .Zero(Zero_Flag),
+
+  .Branch_Result(Branch_Result)
+
+);
+//**********************Data_Memory**********************
+Data_Memory Data_Memory_inst (
+    .clk(CLK),
+    .mem_read(MemRead),
+    .mem_write(MemWrite),
+    .address(ALU_OUT),
+    .write_data(Read_Data2),
+    .read_data(read_data)
+);
+//******************Main_Control****************************
+ Main_Control  Main_Control_int(
+  
+  .instruction(instruction[31:26]),
+  
+  .RegDst(RegDst),
+  .Branch(Branch),
+  .MemRead(MemRead),
+  .MemtoReg(MemtoReg),
+  .ALUOP(ALUOP),
+  .MemWrite(MemWrite),
+  .ALUSrc(ALUSrc),
+  .RegWrite(RegWrite),
+  .jump(jump)
+   ); 
+  
+ //********************************PC****************************** 
+  PC PC_inst(
+    .clk(CLK),
+    .reset(RST),
+    .pc_in(next_pc),
+    .pc_out(pc_addr)
+);
+
+
+//****************************extended**Shift_Left_2********************************
+
+Shift_Left_2 #(.width(32)) Shift_Left_2_inst(
+    .in(extended_instruction),
+    .out(extended_shifted)
+);
+
+//*****************************Pc ALU Adder + 4 *************
+ALU_adder#(.WIDTH (32) ) ALU_adder_one(
+.A(pc_addr), 
+.B(32'd4), 
+.out(ALU_adder_out_one)
+  );
+//****************************** instruction shifted  left Two*************
+
+
+   assign jump_address = { ALU_adder_out_one[31:28], instruction[25:0],2'b00};
+                      
+
+
+//*********************ALU_adder************************
+ALU_adder#(.WIDTH (32) ) ALU_adder_Two(
+.A(extended_shifted), 
+.B(ALU_adder_out_one), 
+.out(ALU_adder_out_two)
+  );
+  //*******************************mux_2x1_branch*******
+  
+   mux_2x1 #(.width(32)) mux_2x1_branch
+(
+   .A(ALU_adder_out_one),
+   .B(ALU_adder_out_two),
+  
+   .Sel(Branch_Result),
+   .out(Branch_Mux_out)
+
+);
+
+//**************************mux_2x1_jump************
+mux_2x1 #(.width(32)) mux_2x1_jump (
+.A(Branch_Mux_out),
+.B(jump_address),
+.Sel(jump),
+.out(next_pc)
+);
+
+
+
+ 
+  
+endmodule
+  

@@ -1,0 +1,15 @@
+module mux_2x1(
+  input wire A,
+  input wire B,
+  
+  input wire Sel,
+  output reg out
+
+);
+
+always@(*)
+begin
+    out = (Sel==0 )? A : B;
+end 
+
+endmodule

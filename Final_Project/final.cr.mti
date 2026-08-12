@@ -1,0 +1,99 @@
+{D:/FPGA - NTI/Final Project/final/PC.v} {1 {vlog -work work -stats=none {D:/FPGA - NTI/Final Project/final/PC.v}
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module PC
+
+Top level modules:
+	PC
+
+} {} {}} {D:/FPGA - NTI/Final Project/final/mips_top.v} {1 {vlog -work work -stats=none {D:/FPGA - NTI/Final Project/final/mips_top.v}
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module mips_top
+
+Top level modules:
+	mips_top
+
+} {} {}} {D:/FPGA - NTI/Final Project/final/Branch_Unit.v} {1 {vlog -work work -stats=none {D:/FPGA - NTI/Final Project/final/Branch_Unit.v}
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module Branch_Unit
+
+Top level modules:
+	Branch_Unit
+
+} {} {}} {D:/FPGA - NTI/Final Project/final/Shift_Left.v} {1 {vlog -work work -stats=none {D:/FPGA - NTI/Final Project/final/Shift_Left.v}
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module Shift_Left_2
+
+Top level modules:
+	Shift_Left_2
+
+} {} {}} {D:/FPGA - NTI/Final Project/final/mips_top_tb.v} {1 {vlog -work work -stats=none {D:/FPGA - NTI/Final Project/final/mips_top_tb.v}
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module mips_top_tb
+
+Top level modules:
+	mips_top_tb
+
+} {} {}} {D:/FPGA - NTI/Final Project/final/ALU_adder.v} {1 {vlog -work work -stats=none {D:/FPGA - NTI/Final Project/final/ALU_adder.v}
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module ALU_adder
+
+Top level modules:
+	ALU_adder
+
+} {} {}} {D:/FPGA - NTI/Final Project/final/Instruction_Memory.v} {1 {vlog -work work -stats=none {D:/FPGA - NTI/Final Project/final/Instruction_Memory.v}
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module Instruction_Memory
+
+Top level modules:
+	Instruction_Memory
+
+} {} {}} {D:/FPGA - NTI/Final Project/final/Data_Memory.v} {1 {vlog -work work -stats=none {D:/FPGA - NTI/Final Project/final/Data_Memory.v}
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module Data_Memory
+
+Top level modules:
+	Data_Memory
+
+} {} {}} {D:/FPGA - NTI/Final Project/final/ALU_Control .v} {1 {vlog -work work -stats=none {D:/FPGA - NTI/Final Project/final/ALU_Control .v}
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module ALU_Control
+
+Top level modules:
+	ALU_Control
+
+} {} {}} {D:/FPGA - NTI/Final Project/final/Register_File.v} {1 {vlog -work work -stats=none {D:/FPGA - NTI/Final Project/final/Register_File.v}
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module Register_File
+
+Top level modules:
+	Register_File
+
+} {} {}} {D:/FPGA - NTI/Final Project/final/mux_2x1.v} {1 {vlog -work work -stats=none {D:/FPGA - NTI/Final Project/final/mux_2x1.v}
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module mux_2x1
+
+Top level modules:
+	mux_2x1
+
+} {} {}} {D:/FPGA - NTI/Final Project/final/Main_Control.v} {1 {vlog -work work -stats=none {D:/FPGA - NTI/Final Project/final/Main_Control.v}
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module Main_Control
+
+Top level modules:
+	Main_Control
+
+} {} {}} {D:/FPGA - NTI/Final Project/final/ALU_32.v} {1 {vlog -work work -stats=none {D:/FPGA - NTI/Final Project/final/ALU_32.v}
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module ALU_32
+
+Top level modules:
+	ALU_32
+
+} {} {}} {D:/FPGA - NTI/Final Project/final/Sign_Extend.v} {1 {vlog -work work -stats=none {D:/FPGA - NTI/Final Project/final/Sign_Extend.v}
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module Sign_Extend
+
+Top level modules:
+	Sign_Extend
+
+} {} {}}

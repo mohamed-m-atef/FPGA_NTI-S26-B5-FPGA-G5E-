@@ -1,0 +1,21 @@
+# 0 compiles, 14 failed with no errors.
+# Error opening D:/NTI_Digital/final/ALU_32.v
+# Path name 'D:/NTI_Digital/final/ALU_32.v' doesn't exist.
+# Error opening D:/NTI_Digital/final/ALU_adder.v
+# Path name 'D:/NTI_Digital/final/ALU_adder.v' doesn't exist.
+# 0 compiles, 14 failed with no errors.
+# Compile of ALU_32.v was successful.
+# Compile of ALU_adder.v was successful.
+# Compile of ALU_Control .v was successful.
+# Compile of Branch_Unit.v was successful.
+# Compile of Data_Memory.v was successful.
+# Compile of Instruction_Memory.v was successful.
+# Compile of Main_Control.v was successful.
+# Compile of mips_top.v was successful.
+# Compile of mips_top_tb.v was successful.
+# Compile of mux_2x1.v was successful.
+# Compile of PC.v was successful.
+# Compile of Register_File.v was successful.
+# Compile of Shift_Left.v was successful.
+# Compile of Sign_Extend.v was successful.
+# 14 compiles, 14 failed with no errors.
